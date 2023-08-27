@@ -1,0 +1,52 @@
+<div class="card shadow-lg mt-5">
+  <div class="card-header text-center py-4 border-0">
+    <h1 class="display-6 fw-bold">Todo List</h1>
+  </div>
+  <form #tasksForm="ngForm">
+    <div class="card-body p-4">
+      <ul class="list-group">
+        <li class="list-group-item mb-2 border-1 py-0 rounded-2">
+          <div class="input-group">
+            <input
+              type="text"
+              name="task"
+              id=""
+              class="form-control border-0 py-3 shadow-none"
+              placeholder="Enter task ..."
+              ngModel
+            />
+            <button
+              class="btn text-success border-0"
+              (click)="onClick(tasksForm)"
+            >
+              <i class="fa-solid fa-circle-plus fa-xl"></i>
+            </button>
+          </div>
+        </li>
+        <li
+          class="list-group-item mb-2 border-1 py-3 rounded-2"
+          *ngFor="let task of todoData | async"
+        >
+          <span>
+            <i
+              class="text-success"
+              [ngClass]="
+                task.isDone
+                  ? 'fa-solid fa-circle-check'
+                  : 'fa-regular fa-circle'
+              "
+              (click)="onCheck(task.id, !task.isDone)"
+            ></i>
+            {{ task.title }}
+            <span class="float-end text-secondary">
+              <i
+                class="fa-solid fa-trash-can"
+                (click)="deleteTodo(task.id)"
+              ></i>
+            </span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </form>
+</div>
